@@ -37,17 +37,17 @@ function addStar() {
 }
 Array(200).fill().forEach(addStar);
 
-const spaceTexture = new THREE.TextureLoader().load('background.jpeg');
+const spaceTexture = new THREE.TextureLoader().load('./assets/background.jpeg');
 scene.background = spaceTexture;
 
-const grassTexture = new THREE.TextureLoader().load('face.jpeg');
+const grassTexture = new THREE.TextureLoader().load('./assets/face.jpeg');
 const cube = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: grassTexture }));
 scene.add(cube);
 cube.position.setZ(5);
 cube.position.setX(10);
 
-const earthTexture = new THREE.TextureLoader().load('earth.jpeg');
-const normalTexture = new THREE.TextureLoader().load('normal.png');
+const earthTexture = new THREE.TextureLoader().load('./assets/earth.jpeg');
+const normalTexture = new THREE.TextureLoader().load('./assets/normal.png');
 
 const planet = new THREE.Mesh(
   new THREE.SphereGeometry(3, 32, 32),
@@ -60,7 +60,7 @@ scene.add(planet);
 planet.position.setZ(30);
 planet.position.setX(-10);
 
-const marsTexture = new THREE.TextureLoader().load('mars.jpeg');
+const marsTexture = new THREE.TextureLoader().load('./assets/mars.jpeg');
 const mars = new THREE.Mesh(
   new THREE.SphereGeometry(1.5, 32, 32),
   new THREE.MeshStandardMaterial({
