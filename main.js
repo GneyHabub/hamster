@@ -12,8 +12,8 @@ camera.position.setZ(30);
 
 renderer.render(scene, camera);
 
-const geometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
-const material = new THREE.MeshStandardMaterial({color: 0xff6347});
+const geometry = new THREE.TorusKnotGeometry( 7, 1, 100, 16 );
+const material = new THREE.MeshStandardMaterial({color: 0x7A1FDE});
 const torus = new THREE.Mesh(geometry, material);
 scene.add(torus);
 
@@ -73,6 +73,19 @@ mars.position.setZ(30);
 mars.position.setX(20);
 mars.position.setY(7);
 
+const doughnutTexture = new THREE.TextureLoader().load('./assets/doughnut.jpeg');
+const doughnut = new THREE.Mesh(
+  new THREE.TorusGeometry( 1, 0.5, 100, 64 ), 
+  new THREE.MeshStandardMaterial({
+    map: doughnutTexture
+  })
+);
+doughnut.position.setZ(40);
+doughnut.position.setX(15);
+scene.add(doughnut);
+
+let doughnutIsAnimated = false;
+
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
   if(t === -1){
@@ -82,6 +95,9 @@ function moveCamera() {
   }
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
+  if(t <= -4800 && !doughnutIsAnimated) {
+    doughnutIsAnimated = true;
+  }
 }
 
 document.body.onscroll = moveCamera;
@@ -105,6 +121,12 @@ function animate() {
 
   mars.rotation.x += 0.03;
   mars.rotation.y += 0.03;
+
+  if(doughnutIsAnimated) {
+    doughnut.rotation.x += 0.003;
+    // doughnut.translateY(-0.01);
+    doughnut.translateX(-0.01);
+  }
 
   renderer.render(scene, camera);
 }
